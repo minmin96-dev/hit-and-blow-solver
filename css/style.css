@@ -1,0 +1,19 @@
+/* ===== 共通 ===== */
+
+body {
+    margin: 24px;
+    font-family: sans-serif;
+    line-height: 1.5;
+}
+
+h1 {
+    margin-bottom: 32px;
+}
+
+section {
+    margin-bottom: 40px;
+}
+
+h2 {
+    margin-bottom: 12px;
+}
