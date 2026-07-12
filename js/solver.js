@@ -8,14 +8,13 @@ const COLORS = [
 ];
 
 /**
- * 候補一覧を生成する
+ * 候補一覧を生成する関数
  *
  * @param {number} colorCount 使用する色数
  * @param {number} answerLength 桁数
  * @returns {number[][]}
  */
 function generateCandidates(colorCount, answerLength) {
-
     const candidates = [];
     function buildCandidate(current) {
 
@@ -25,7 +24,6 @@ function generateCandidates(colorCount, answerLength) {
             candidates.push([...current]);
             return;
         }
-        
         for (let color = 0; color < colorCount; color++) {
             if (current.includes(color)) {
                 continue;
@@ -34,10 +32,29 @@ function generateCandidates(colorCount, answerLength) {
             buildCandidate(current);
             current.pop();
         }
+    }
+    buildCandidate([]);
+    return candidates;
+}
 
+/**
+ * 2つの候補を比較してHit/Blowを返す関数
+ *
+ * @param {number[]} guess プレイヤーの予想
+ * @param {number[]} answer 比較対象
+ * @returns {{hit:number, blow:number}}
+ */
+function judgeHitBlow(guess, answer) {
+
+    let hit = 0;
+    for (let i = 0; i < guess.length; i++) {
+        if (guess[i] === answer[i]) {
+            hit++;
+        }
     }
 
-    buildCandidate([]);
-
-    return candidates;
+    return {
+        hit: hit,
+        blow: 0
+    };
 }
