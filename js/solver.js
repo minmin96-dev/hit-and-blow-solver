@@ -60,7 +60,6 @@ function judgeHitBlow(guess, answer) {
             answerRemain.push(answer[i]);
         }
     }
-
     // 残った色同士でBlowを数える
     for (const color of guessRemain) {
         const index = answerRemain.indexOf(color);
@@ -74,4 +73,17 @@ function judgeHitBlow(guess, answer) {
         hit: hit,
         blow: blow
     };
+}
+
+/**
+ * 候補一覧をHit/Blow結果で絞り込む
+ *
+ * @param {number[][]} candidates 現在の候補一覧
+ * @param {number[]} guess プレイヤーの予想
+ * @param {{hit:number, blow:number}} result ゲームから返ってきた結果
+ * @returns {number[][]}
+ */
+function filterCandidates(candidates, guess, result) {
+
+    return [];
 }
