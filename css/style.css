@@ -78,8 +78,12 @@ h2 {
     display: none;
 }
 
-#toggle-candidate-button {
-    margin-bottom: 12px;
+button {
     padding: 8px 16px;
     cursor: pointer;
+}
+
+#analysis {
+    border-top: 1px solid gray;
+    padding-top: 20px;
 }
