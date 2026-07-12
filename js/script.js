@@ -109,5 +109,22 @@ function setupResultInput() {
                 Number(event.target.value);
         };
 }
-
 setupResultInput();
+
+document
+    .getElementById("confirm-button")
+    .onclick = () => {
+
+        gameState.candidates =
+            filterCandidates(
+                gameState.candidates,
+                gameState.guess,
+                {
+                    hit: gameState.hit,
+                    blow: gameState.blow
+                }
+            );
+
+        render();
+
+    };

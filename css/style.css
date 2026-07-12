@@ -61,8 +61,11 @@ h2 {
     margin-bottom: 10px;
 }
 
-#result-input input {
+#result-input input,
+#result-input select {
+
     margin-left: 10px;
+
 }
 
 #confirm-button {
