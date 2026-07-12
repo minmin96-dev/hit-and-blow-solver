@@ -109,3 +109,16 @@ function filterCandidates(candidates, guess, result) {
 
     return filtered;
 }
+
+function validateResult(hit, blow, answerLength) {
+    if (hit < 0 || blow < 0) {
+        return false;
+    }
+    if (hit > answerLength || blow > answerLength) {
+        return false;
+    }
+    if (hit + blow > answerLength) {
+        return false;
+    }
+    return true;
+}

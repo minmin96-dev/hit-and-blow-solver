@@ -117,6 +117,16 @@ setupResultInput();
 document
     .getElementById("confirm-button")
     .onclick = () => {
+        if (
+            !validateResult(
+                gameState.hit,
+                gameState.blow,
+                gameState.guess.length
+            )
+        ) {
+            alert("Hit / Blow の値が不正です");
+            return;
+        }
         gameState.candidates =
             filterCandidates(
                 gameState.candidates,
