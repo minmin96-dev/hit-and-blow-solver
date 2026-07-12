@@ -1,3 +1,12 @@
-const candidates = generateCandidates(6, 4);
+const gameState = {
+    candidates: generateCandidates(6, 4),
+    history: []
+};
 
-document.getElementById("candidate-count").textContent = candidates.length;
+render();
+
+function render() {
+    document.getElementById("candidate-count").textContent =
+        gameState.candidates.length;
+
+}
