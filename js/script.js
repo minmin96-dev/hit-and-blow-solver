@@ -127,7 +127,8 @@ document
             alert("Hit / Blow の値が不正です");
             return;
         }
-        gameState.candidates =
+        
+        const filteredCandidates =
             filterCandidates(
                 gameState.candidates,
                 gameState.guess,
@@ -136,6 +137,14 @@ document
                     blow: gameState.blow
                 }
             );
+
+        if (filteredCandidates.length === 0) {
+            alert(
+                "条件に一致する候補がありません。入力を確認してください。"
+            );
+            return;
+        }
+        gameState.candidates = filteredCandidates;
 
         gameState.history.push({
 
