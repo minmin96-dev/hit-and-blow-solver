@@ -56,8 +56,16 @@
         </section>
 
         <section id="candidate">
-            <h2>候補数</h2>
-            <p id="candidate-count">0</p>
+            <h2>候補</h2>
+            <button id="toggle-candidate-button">候補を見る</button>
+
+            <div id="candidate-area" class="hidden">
+                <p>
+                    残り候補数：
+                    <span id="candidate-count">0</span>
+                </p>
+                <div id="candidate-list"></div>
+            </div>
         </section>
 
         <section id="history">

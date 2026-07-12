@@ -73,3 +73,13 @@ h2 {
     padding: 8px 20px;
     cursor: pointer;
 }
+
+.hidden {
+    display: none;
+}
+
+#toggle-candidate-button {
+    margin-bottom: 12px;
+    padding: 8px 16px;
+    cursor: pointer;
+}

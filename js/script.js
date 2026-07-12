@@ -5,7 +5,8 @@ const gameState = {
     editingIndex: null,
 
     hit: 0,
-    blow: 0
+    blow: 0,
+    showCandidates: false
 };
 
 render();
@@ -15,12 +16,14 @@ function render() {
     renderGuessArea();
     renderColorPalette();
     renderHistory();
+    renderCandidateList();
 }
 
 function renderCandidateCount() {
 
     document.getElementById("candidate-count").textContent =
         gameState.candidates.length;
+
 }
 
 function renderGuessArea() {
@@ -58,8 +61,6 @@ function renderGuessArea() {
 }
 
 function renderColorPalette() {
-
-    console.log("renderColorPalette", gameState.editingIndex);
 
     const palette =
         document.getElementById("color-palette");
@@ -152,7 +153,7 @@ function renderHistory() {
                 document.createElement("div");
 
             div.textContent =
-                `${index + 1}回目 : `
+                `${gameState.history.length - index}回目 : `
                 +
                 `${record.hit}H `
                 +
@@ -161,6 +162,56 @@ function renderHistory() {
                 `残り候補 ${record.remaining}`;
 
             historyArea.appendChild(div);
+        }
+    );
+}
+
+document
+    .getElementById("toggle-candidate-button")
+    .onclick = () => {
+        gameState.showCandidates =
+            !gameState.showCandidates;
+
+        document
+            .getElementById("toggle-candidate-button")
+            .textContent =
+                gameState.showCandidates
+                    ? "候補を隠す"
+                    : "候補を見る";
+        render();
+    };
+
+function renderCandidateList() {
+
+    const area = document.getElementById("candidate-area");
+
+    if (gameState.showCandidates) {
+        area.classList.remove("hidden");
+    } else {
+        area.classList.add("hidden");
+        return;
+    }
+
+    const list = document.getElementById("candidate-list");
+    list.innerHTML = "";
+
+    gameState.candidates.forEach(
+        candidate => {
+
+            const row = document.createElement("div");
+            row.className = "candidate-row";
+
+            candidate.forEach(
+                colorId => {
+                    const circle =
+                        document.createElement("div");
+
+                    circle.className = "candidate-color";
+                    circle.style.backgroundColor = COLORS[colorId].css;
+                    row.appendChild(circle);
+                }
+            );
+            list.appendChild(row);
         }
     );
 }
