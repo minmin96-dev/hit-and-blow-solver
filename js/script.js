@@ -11,10 +11,10 @@ const gameState = {
 render();
 
 function render() {
-
     renderCandidateCount();
     renderGuessArea();
     renderColorPalette();
+    renderHistory();
 }
 
 function renderCandidateCount() {
@@ -114,7 +114,6 @@ setupResultInput();
 document
     .getElementById("confirm-button")
     .onclick = () => {
-
         gameState.candidates =
             filterCandidates(
                 gameState.candidates,
@@ -125,6 +124,43 @@ document
                 }
             );
 
-        render();
+        gameState.history.push({
 
+            guess: [...gameState.guess],
+            hit: gameState.hit,
+            blow: gameState.blow,
+            remaining:
+                gameState.candidates.length
+
+        });
+        render();
     };
+
+function renderHistory() {
+
+    const historyArea =
+        document.getElementById("history");
+
+    historyArea.innerHTML ="<h2>履歴</h2>";
+
+    [...gameState.history]
+        .reverse()
+        .forEach(
+            (record, index) => {
+
+            const div =
+                document.createElement("div");
+
+            div.textContent =
+                `${index + 1}回目 : `
+                +
+                `${record.hit}H `
+                +
+                `${record.blow}B `
+                +
+                `残り候補 ${record.remaining}`;
+
+            historyArea.appendChild(div);
+        }
+    );
+}
