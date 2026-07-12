@@ -150,22 +150,38 @@ function renderHistory() {
         .reverse()
         .forEach(
             (record, index) => {
+                const div =
+                    document.createElement("div");
+                div.innerHTML = "";
 
-            const div =
-                document.createElement("div");
+                const title =
+                    document.createElement("div");
+                title.textContent =
+                    `${gameState.history.length - index}回目 : `
+                    +
+                    `${record.hit}H `
+                    +
+                    `${record.blow}B `
+                    +
+                    `残り候補 ${record.remaining}`;
 
-            div.textContent =
-                `${gameState.history.length - index}回目 : `
-                +
-                `${record.hit}H `
-                +
-                `${record.blow}B `
-                +
-                `残り候補 ${record.remaining}`;
+                div.appendChild(title);
 
-            historyArea.appendChild(div);
-        }
-    );
+                const colors =
+                    document.createElement("div");
+
+                colors.className = "history-colors";
+
+                record.guess.forEach(colorId => {
+                    colors.appendChild(
+                        createColorCircle(colorId)
+                    );
+                });
+                div.appendChild(colors);
+
+                historyArea.appendChild(div);
+             }
+        );
 }
 
 document
@@ -205,12 +221,11 @@ function renderCandidateList() {
 
             candidate.forEach(
                 colorId => {
-                    const circle =
-                        document.createElement("div");
 
-                    circle.className = "candidate-color";
-                    circle.style.backgroundColor = COLORS[colorId].css;
-                    row.appendChild(circle);
+                    row.appendChild(
+                        createColorCircle(colorId)
+                    );
+
                 }
             );
             list.appendChild(row);
@@ -311,3 +326,11 @@ document
         render();
     };
 
+function createColorCircle(colorId) {
+    const circle =
+        document.createElement("span");
+
+    circle.className = "color-circle";
+    circle.style.backgroundColor = COLORS[colorId].css;
+    return circle;
+}

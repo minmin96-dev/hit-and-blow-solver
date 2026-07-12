@@ -87,3 +87,20 @@ button {
     border-top: 1px solid gray;
     padding-top: 20px;
 }
+
+.color-circle {
+    display: inline-block;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 1px solid gray;
+    margin-right: 6px;
+}
+
+.history-colors {
+    margin-top: 8px;
+}
+
+.candidate-row {
+    margin-bottom: 8px;
+}
