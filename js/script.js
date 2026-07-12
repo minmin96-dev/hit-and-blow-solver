@@ -156,14 +156,18 @@ function renderHistory() {
 
                 const title =
                     document.createElement("div");
+
                 title.textContent =
                     `${gameState.history.length - index}回目 : `
                     +
                     `${record.hit}H `
                     +
-                    `${record.blow}B `
-                    +
-                    `残り候補 ${record.remaining}`;
+                    `${record.blow}B`;
+
+                if (gameState.showCandidates) {
+                    title.textContent +=
+                        ` 残り候補 ${record.remaining}`;
+                }
 
                 div.appendChild(title);
 
@@ -298,12 +302,32 @@ function renderHeatmap() {
             title.textContent = `${index + 1}個目`;
             list.appendChild(title);
 
-            positionData.forEach(
-                data => {
+            positionData
+                .sort(
+                    (a,b) =>
+                        b.percentage - a.percentage
+                )
+                .forEach(
+                    data => {
                     const div =
                         document.createElement("div");
+                    div.className = "heatmap-row";
+                    div.innerHTML = "";
+                    const circle =
+                        createColorCircle(data.colorId);
+                    div.appendChild(circle);
 
-                    div.textContent = `${COLORS[data.colorId].name} : ${data.percentage}%`;
+                    const label =
+                        document.createElement("span");
+                    label.textContent = `${data.percentage}%`;
+                    div.appendChild(label);
+
+                    const bar =
+                        document.createElement("div");
+                    bar.className = "heatmap-bar";
+                    bar.style.width = `${data.percentage}%`;
+
+                    div.appendChild(bar);
                     list.appendChild(div);
                 }
             );
@@ -327,6 +351,7 @@ document
     };
 
 function createColorCircle(colorId) {
+    // 色表示してくれる共通部品
     const circle =
         document.createElement("span");
 

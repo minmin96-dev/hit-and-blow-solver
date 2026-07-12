@@ -104,3 +104,16 @@ button {
 .candidate-row {
     margin-bottom: 8px;
 }
+
+.heatmap-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 6px;
+}
+
+.heatmap-bar {
+    height: 12px;
+    background-color: gray;
+    max-width: 200px;
+}
