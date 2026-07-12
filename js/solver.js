@@ -16,13 +16,28 @@ const COLORS = [
  */
 function generateCandidates(colorCount, answerLength) {
 
-    function generateCandidates(colorCount, answerLength) {
     const candidates = [];
     function buildCandidate(current) {
 
+        // [0,1,2,3]が完成したらcandidates に保存する。
+        // [...current] としているのは配列のコピーを保存するため。
+        if (current.length === answerLength) {
+            candidates.push([...current]);
+            return;
+        }
+        
+        for (let color = 0; color < colorCount; color++) {
+            if (current.includes(color)) {
+                continue;
+            }
+            current.push(color);
+            buildCandidate(current);
+            current.pop();
+        }
+
     }
 
-    return candidates;
-}
+    buildCandidate([]);
 
+    return candidates;
 }
