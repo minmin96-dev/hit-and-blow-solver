@@ -47,14 +47,31 @@ function generateCandidates(colorCount, answerLength) {
 function judgeHitBlow(guess, answer) {
 
     let hit = 0;
+    let blow = 0;
+    const guessRemain = [];
+    const answerRemain = [];
+
+    // まずHitを数え、Hitでない色だけ残す
     for (let i = 0; i < guess.length; i++) {
         if (guess[i] === answer[i]) {
             hit++;
+        } else {
+            guessRemain.push(guess[i]);
+            answerRemain.push(answer[i]);
+        }
+    }
+
+    // 残った色同士でBlowを数える
+    for (const color of guessRemain) {
+        const index = answerRemain.indexOf(color);
+        if (index !== -1) {
+            blow++;
+            answerRemain.splice(index, 1);
         }
     }
 
     return {
         hit: hit,
-        blow: 0
+        blow: blow
     };
 }
