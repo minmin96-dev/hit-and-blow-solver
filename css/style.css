@@ -17,3 +17,56 @@ section {
 h2 {
     margin-bottom: 12px;
 }
+
+#guess-area {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.color-slot {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: 2px solid gray;
+    background-color: lightgray;
+    cursor: pointer;
+}
+
+.color-slot.active {
+    border: 4px solid dodgerblue;
+    transform: scale(1.15);
+}
+
+#color-palette {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 16px;
+}
+
+.palette-color {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    border: 2px solid black;
+    cursor: pointer;
+}
+
+#result-input {
+    margin-top: 20px;
+}
+
+#result-input div {
+    margin-bottom: 10px;
+}
+
+#result-input input {
+    margin-left: 10px;
+}
+
+#confirm-button {
+    margin-top: 10px;
+    padding: 8px 20px;
+    cursor: pointer;
+}

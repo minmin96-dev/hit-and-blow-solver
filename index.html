@@ -24,13 +24,44 @@
             <h2>入力</h2>
         </section>
 
-        <section id="history">
-            <h2>履歴</h2>
+        <section id="guess">
+            <h2>予想</h2>
+            <div id="guess-area"></div>
+            <div id="color-palette"></div>
+            <div id="result-input">
+                <div>
+                    <label>Hit</label>
+                    <select id="hit-input">
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                    </select>
+                </div>
+                <div>
+                    <label>Blow</label>
+                    <select id="blow-input">
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                    </select>
+                </div>
+                <button id="confirm-button">
+                    確定
+                </button>
+            </div>
         </section>
 
         <section id="candidate">
             <h2>候補数</h2>
             <p id="candidate-count">0</p>
+        </section>
+
+        <section id="history">
+            <h2>履歴</h2>
         </section>
 
         <section id="heatmap">
