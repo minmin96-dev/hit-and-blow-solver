@@ -64,7 +64,7 @@ function renderHistory() {
 
                 const editButton =
                     document.createElement("button");
-
+                editButton.className = "edit-button";
                 editButton.textContent = "修正";
                 editButton.onclick = () => {
                     loadHistory(index);

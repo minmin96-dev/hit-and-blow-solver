@@ -1,21 +1,10 @@
 /* ===== 共通 ===== */
 
 body {
-    margin: 24px;
-    font-family: sans-serif;
-    line-height: 1.5;
-}
-
-h1 {
-    margin-bottom: 32px;
-}
-
-section {
-    margin-bottom: 40px;
-}
-
-h2 {
-    margin-bottom: 12px;
+    margin: 0;
+    padding: 24px;
+    background-color: #f4f7fb;
+    font-family: "Segoe UI", "Noto Sans JP", sans-serif;
 }
 
 #guess-area {
@@ -70,8 +59,8 @@ h2 {
 
 #confirm-button {
     margin-top: 10px;
-    padding: 8px 20px;
-    cursor: pointer;
+    padding: 12px 28px;
+    font-size: 16px;
 }
 
 .hidden {
@@ -79,13 +68,24 @@ h2 {
 }
 
 button {
-    padding: 8px 16px;
+    padding: 10px 18px;
+    border: none;
+    border-radius: 8px;
+    background-color: #144287;
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
     cursor: pointer;
+    transition: 0.2s;
 }
 
-#analysis {
-    border-top: 1px solid gray;
-    padding-top: 20px;
+button:hover {
+    background-color: #3d79dc;
+    transform: translateY(-1px);
+}
+
+button:active {
+    transform: translateY(1px);
 }
 
 .color-circle {
@@ -116,4 +116,41 @@ button {
     height: 12px;
     background-color: gray;
     max-width: 200px;
+}
+
+main {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+section {
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+h1 {
+    text-align: center;
+    color: #2c3e50;
+    margin-bottom: 30px;
+}
+
+h2 {
+    color: #34495e;
+    border-bottom: 2px solid #e6edf5;
+    padding-bottom: 8px;
+    margin-top: 0;
+}
+
+.edit-button {
+    padding: 5px 12px;
+    font-size: 12px;
+    margin-top: 8px;
+    background-color: #95a5a6;
+}
+
+.edit-button:hover {
+    background-color: #7f8c8d;
 }
