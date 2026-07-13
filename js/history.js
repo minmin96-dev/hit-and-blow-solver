@@ -65,7 +65,7 @@ function renderHistory() {
                 const editButton =
                     document.createElement("button");
 
-                editButton.textContent = "編集";
+                editButton.textContent = "修正";
                 editButton.onclick = () => {
                     loadHistory(index);
                 };
@@ -109,5 +109,5 @@ function renderConfirmButton() {
     button.textContent =
         gameState.editingHistoryIndex === null
             ? "確定"
-            : "更新";
+            : "修正反映";
 }

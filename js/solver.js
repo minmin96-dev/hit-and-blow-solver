@@ -3,7 +3,7 @@ const COLORS = [
     { id: 1, name: "赤", css: "red" },
     { id: 2, name: "緑", css: "green" },
     { id: 3, name: "黄", css: "yellow" },
-    { id: 4, name: "桃", css: "pink" },
+    { id: 4, name: "桃", css: "magenta" },
     { id: 5, name: "白", css: "white" }
 ];
 
