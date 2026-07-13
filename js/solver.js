@@ -7,6 +7,10 @@ const COLORS = [
     { id: 5, name: "白", css: "white" }
 ];
 
+const GAME_RULE = {
+    allowDuplicate: false
+};
+
 /**
  * 候補一覧を生成する関数
  *
@@ -14,7 +18,10 @@ const COLORS = [
  * @param {number} answerLength 桁数
  * @returns {number[][]}
  */
-function generateCandidates(colorCount, answerLength) {
+function generateCandidatesNoDuplicate(
+    colorCount,
+    answerLength
+) {
     const candidates = [];
     function buildCandidate(current) {
 
@@ -35,6 +42,40 @@ function generateCandidates(colorCount, answerLength) {
     }
     buildCandidate([]);
     return candidates;
+}
+
+function generateCandidates(
+    colorCount,
+    answerLength
+) {
+
+    if (GAME_RULE.allowDuplicate) {
+
+        return generateCandidatesAllowDuplicate(
+            colorCount,
+            answerLength
+        );
+
+    }
+
+    return generateCandidatesNoDuplicate(
+        colorCount,
+        answerLength
+    );
+
+}
+
+function generateCandidatesAllowDuplicate(
+    colorCount,
+    answerLength
+) {
+
+    // Sprint9-Aではまだ未実装
+    return generateCandidatesNoDuplicate(
+        colorCount,
+        answerLength
+    );
+
 }
 
 /**
@@ -94,11 +135,21 @@ function judgeHitBlow(guess, answer) {
 function filterCandidates(candidates, guess, result) {
 
     const filtered = [];
-
     for (const candidate of candidates) {
 
-        const judgeResult = judgeHitBlow(guess, candidate);
-
+        const judgeResult =
+            judgeHitBlow(
+                guess,
+                candidate
+            );
+        if (
+            guess.join(",") === "0,0,0,0"
+        ) {
+            console.log(
+                candidate,
+                judgeResult
+            );
+        }
         if (
             judgeResult.hit === result.hit &&
             judgeResult.blow === result.blow
@@ -110,15 +161,35 @@ function filterCandidates(candidates, guess, result) {
     return filtered;
 }
 
-function validateResult(hit, blow, answerLength) {
+function validateResult(
+    guess,
+    hit,
+    blow,
+    answerLength
+) {
     if (hit < 0 || blow < 0) {
         return false;
     }
-    if (hit > answerLength || blow > answerLength) {
+    if (hit > answerLength) {
+        return false;
+    }
+    if (blow > answerLength) {
         return false;
     }
     if (hit + blow > answerLength) {
         return false;
+    }
+    if (!GAME_RULE.allowDuplicate) {
+
+        const uniqueColorCount =
+            new Set(guess).size;
+
+        if (
+            hit + blow >
+            uniqueColorCount
+        ) {
+            return false;
+        }
     }
     return true;
 }

@@ -24,9 +24,10 @@ function render() {
 }
 
 function renderCandidateCount() {
-
-    document.getElementById("candidate-count").textContent =
-        gameState.candidates.length;
+    document
+        .getElementById("candidate-count")
+        .textContent =
+            gameState.candidates.length;
 
 }
 
@@ -121,6 +122,7 @@ document
     .onclick = () => {
         if (
             !validateResult(
+                gameState.guess,
                 gameState.hit,
                 gameState.blow,
                 gameState.guess.length
@@ -129,33 +131,45 @@ document
             alert("Hit / Blow の値が不正です");
             return;
         }
-        
-        const filteredCandidates =
-            filterCandidates(
-                gameState.candidates,
-                gameState.guess,
-                {
-                    hit: gameState.hit,
-                    blow: gameState.blow
-                }
-            );
 
-        if (filteredCandidates.length === 0) {
-            alert(
-                "条件に一致する候補がありません。入力を確認してください。"
-            );
-            return;
+        if (
+            gameState.editingHistoryIndex !== null
+        ) {
+            gameState.history[
+                gameState.editingHistoryIndex
+            ] = {
+                guess: [...gameState.guess],
+                hit: gameState.hit,
+                blow: gameState.blow
+            };
+
+            rebuildCandidates();
+            gameState.editingHistoryIndex = null;
+            gameState.editingIndex = null;
+        } else {
+            gameState.history.push({
+                guess: [...gameState.guess],
+                hit: gameState.hit,
+                blow: gameState.blow
+            });
+            rebuildCandidates();
         }
-        gameState.candidates = filteredCandidates;
 
-        gameState.history.push({
+        gameState.guess = [null, null, null, null];
+        gameState.editingIndex = null;
+        gameState.hit = 0;
+        gameState.blow = 0;
 
-            guess: [...gameState.guess],
-            hit: gameState.hit,
-            blow: gameState.blow
+        document
+            .getElementById("hit-input")
+            .value = 0;
 
-        });
+        document
+            .getElementById("blow-input")
+            .value = 0;
+
         render();
+
     };
 
 function renderHistory() {
@@ -166,6 +180,24 @@ function renderHistory() {
     historyArea.innerHTML ="<h2>履歴</h2>";
 
     let candidates = generateCandidates(6, 4);
+    const remainingList = [];
+
+    for (const record of gameState.history) {
+
+        candidates =
+            filterCandidates(
+                candidates,
+                record.guess,
+                {
+                    hit: record.hit,
+                    blow: record.blow
+                }
+            );
+
+        remainingList.push(
+            candidates.length
+        );
+    }
 
     [...gameState.history]
         .reverse()
@@ -173,17 +205,6 @@ function renderHistory() {
             (record, index) => {
                 const div =
                     document.createElement("div");
-
-                    candidates =
-                        filterCandidates(
-                            candidates,
-                            record.guess,
-                            {
-                                hit: record.hit,
-                                blow: record.blow
-                            }
-                        );
-
                     div.innerHTML = "";
 
                 const title =
@@ -198,7 +219,7 @@ function renderHistory() {
 
                 if (gameState.showCandidates) {
                     title.textContent +=
-                        ` 残り候補 ${candidates.length}`;
+                        ` 残り候補 ${remainingList[gameState.history.length - 1 - index]}`;
                 }
 
                 div.appendChild(title);
@@ -245,7 +266,7 @@ document
     };
 
 function renderCandidateList() {
-
+    
     const area = document.getElementById("candidate-area");
 
     if (gameState.showCandidates) {
@@ -390,6 +411,23 @@ document
                     : "ヒートマップを見る";
         render();
     };
+
+function rebuildCandidates() {
+    let candidates = generateCandidates(6, 4);
+
+    for (const record of gameState.history) {
+        candidates =
+            filterCandidates(
+                candidates,
+                record.guess,
+                {
+                    hit: record.hit,
+                    blow: record.blow
+                }
+            );
+    }
+    gameState.candidates = candidates;
+}
 
 function createColorCircle(colorId) {
     // 色表示してくれる共通部品
