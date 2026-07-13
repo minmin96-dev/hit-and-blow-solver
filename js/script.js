@@ -7,7 +7,8 @@ const gameState = {
     hit: 0,
     blow: 0,
     showCandidates: false,
-    showHeatmap: false
+    showHeatmap: false,
+    editingHistoryIndex: null
 };
 
 render();
@@ -19,6 +20,7 @@ function render() {
     renderHistory();
     renderCandidateList();
     renderHeatmap();
+    renderConfirmButton();
 }
 
 function renderCandidateCount() {
@@ -150,9 +152,7 @@ document
 
             guess: [...gameState.guess],
             hit: gameState.hit,
-            blow: gameState.blow,
-            remaining:
-                gameState.candidates.length
+            blow: gameState.blow
 
         });
         render();
@@ -165,13 +165,26 @@ function renderHistory() {
 
     historyArea.innerHTML ="<h2>履歴</h2>";
 
+    let candidates = generateCandidates(6, 4);
+
     [...gameState.history]
         .reverse()
         .forEach(
             (record, index) => {
                 const div =
                     document.createElement("div");
-                div.innerHTML = "";
+
+                    candidates =
+                        filterCandidates(
+                            candidates,
+                            record.guess,
+                            {
+                                hit: record.hit,
+                                blow: record.blow
+                            }
+                        );
+
+                    div.innerHTML = "";
 
                 const title =
                     document.createElement("div");
@@ -185,7 +198,7 @@ function renderHistory() {
 
                 if (gameState.showCandidates) {
                     title.textContent +=
-                        ` 残り候補 ${record.remaining}`;
+                        ` 残り候補 ${candidates.length}`;
                 }
 
                 div.appendChild(title);
@@ -201,6 +214,15 @@ function renderHistory() {
                     );
                 });
                 div.appendChild(colors);
+
+                const editButton =
+                    document.createElement("button");
+
+                editButton.textContent = "編集";
+                editButton.onclick = () => {
+                    loadHistory(index);
+                };
+                div.appendChild(editButton);
 
                 historyArea.appendChild(div);
              }
@@ -377,4 +399,41 @@ function createColorCircle(colorId) {
     circle.className = "color-circle";
     circle.style.backgroundColor = COLORS[colorId].css;
     return circle;
+}
+
+function loadHistory(displayIndex) {
+    const historyIndex =
+        gameState.history.length
+        - 1
+        - displayIndex;
+
+    const record =
+        gameState.history[historyIndex];
+
+    gameState.guess = [...record.guess];
+    gameState.hit = record.hit;
+    gameState.blow = record.blow;
+    gameState.editingHistoryIndex = historyIndex;
+
+    document
+        .getElementById("hit-input")
+        .value =
+            record.hit;
+
+    document
+        .getElementById("blow-input")
+        .value =
+            record.blow;
+    render();
+}
+
+function renderConfirmButton() {
+    const button =
+        document.getElementById("confirm-button");
+
+    button.textContent =
+        gameState.editingHistoryIndex === null
+            ? "確定"
+            : "更新";
+
 }
