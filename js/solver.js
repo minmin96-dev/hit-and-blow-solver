@@ -142,14 +142,7 @@ function filterCandidates(candidates, guess, result) {
                 guess,
                 candidate
             );
-        if (
-            guess.join(",") === "0,0,0,0"
-        ) {
-            console.log(
-                candidate,
-                judgeResult
-            );
-        }
+
         if (
             judgeResult.hit === result.hit &&
             judgeResult.blow === result.blow
@@ -157,7 +150,6 @@ function filterCandidates(candidates, guess, result) {
             filtered.push(candidate);
         }
     }
-
     return filtered;
 }
 

@@ -74,3 +74,13 @@ function renderColorPalette() {
         palette.appendChild(button);
     }
 }
+
+function createColorCircle(colorId) {
+    // 色表示してくれる共通部品
+    const circle =
+        document.createElement("span");
+
+    circle.className = "color-circle";
+    circle.style.backgroundColor = COLORS[colorId].css;
+    return circle;
+}
