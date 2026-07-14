@@ -2,7 +2,7 @@
 
 body {
     margin: 0;
-    padding: 24px;
+    padding: 32px 20px;
     background-color: #f4f7fb;
     font-family: "Segoe UI", "Noto Sans JP", sans-serif;
 }
@@ -43,24 +43,32 @@ body {
 }
 
 #result-input {
+    display: flex;
+    align-items: end;
+    gap: 16px;
     margin-top: 20px;
+    flex-wrap: wrap;
 }
 
 #result-input div {
-    margin-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
 }
 
 #result-input input,
 #result-input select {
-
-    margin-left: 10px;
-
+    margin-left: 0;
+    padding: 6px 10px;
+    border-radius: 6px;
+    border: 1px solid #cfd8e3;
+    font-size: 14px;
 }
 
 #confirm-button {
-    margin-top: 10px;
-    padding: 12px 28px;
+    padding: 10px 28px;
     font-size: 16px;
+    align-self: end;
 }
 
 .hidden {
@@ -77,6 +85,7 @@ button {
     font-weight: bold;
     cursor: pointer;
     transition: 0.2s;
+    align-self: flex-start;
 }
 
 button:hover {
@@ -97,12 +106,29 @@ button:active {
     margin-right: 6px;
 }
 
+.history-colors .color-circle {
+    width: 20px;
+    height: 20px;
+    margin-right: 4px;
+}
+
 .history-colors {
-    margin-top: 8px;
+    display: flex;
+    align-items: center;
+    gap: 0px;
+    margin-top: 0;
 }
 
 .candidate-row {
-    margin-bottom: 8px;
+    display: flex;
+    gap: 6px;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+#candidate-list {
+    max-height: 420px;
+    overflow-y: auto;
 }
 
 .heatmap-row {
@@ -114,21 +140,26 @@ button:active {
 
 .heatmap-bar {
     height: 12px;
-    background-color: gray;
-    max-width: 200px;
+    background: linear-gradient(
+        to right,
+        #f9a7ff,
+        #4f8ef7        
+    );
+    border-radius: 999px;
+    max-width: 220px;
 }
 
 main {
-    max-width: 900px;
+    max-width: 1000px;
     margin: 0 auto;
 }
 
 section {
     background: white;
-    border-radius: 12px;
-    padding: 20px;
-    margin-bottom: 20px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    border-radius: 16px;
+    padding: 24px;
+    margin-bottom: 24px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
 }
 
 h1 {
@@ -138,19 +169,105 @@ h1 {
 }
 
 h2 {
-    color: #34495e;
+    color: #2c3e50;
     border-bottom: 2px solid #e6edf5;
-    padding-bottom: 8px;
+    padding-bottom: 10px;
     margin-top: 0;
+    margin-bottom: 18px;
+    font-size: 1.25rem;
 }
 
 .edit-button {
     padding: 5px 12px;
     font-size: 12px;
-    margin-top: 8px;
+    margin-top: 0;
     background-color: #95a5a6;
 }
 
 .edit-button:hover {
     background-color: #7f8c8d;
+}
+
+#candidate,
+#heatmap {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+#heatmap-list {
+    max-height: 420px;
+    overflow-y: auto;
+}
+
+.history-row {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 10px 0;
+    border-bottom: 1px solid #ececec;
+}
+
+.history-row .edit-button {
+    flex-shrink: 0;
+}
+
+.history-row > div:first-child {
+    min-width: 130px;
+}
+
+.history-turn {
+    width: 60px;
+    font-weight: bold;
+}
+
+.history-result {
+    width: 55px;
+    color: #555;
+}
+
+.history-remain {
+    width: 120px;
+    color: #888;
+    font-size: 0.9rem;
+}
+
+/* ===== 分析レイアウト ===== */
+#analysis {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+#candidate,
+#heatmap {
+    flex: 1;
+    min-width: 320px;
+}
+
+/* ===== Footer ===== */
+
+footer {
+    text-align: center;
+    color: #7f8c8d;
+    font-size: 13px;
+    margin-top: 36px;
+    margin-bottom: 12px;
+}
+
+footer p {
+    margin: 4px 0;
+}
+
+/* ===== スマホの場合だけ縦並びになるように ===== */
+@media (max-width: 700px) {
+
+    #analysis {
+        display: block;
+    }
+
+    #candidate {
+        margin-bottom: 20px;
+    }
+
 }

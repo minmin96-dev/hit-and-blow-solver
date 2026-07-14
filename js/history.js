@@ -31,24 +31,36 @@ function renderHistory() {
             (record, index) => {
                 const div =
                     document.createElement("div");
-                    div.innerHTML = "";
-
-                const title =
+                div.className = "history-row";
+                div.innerHTML = "";
+                
+                const turn =
                     document.createElement("div");
 
-                title.textContent =
-                    `${gameState.history.length - index}回目 : `
-                    +
-                    `${record.hit}H `
-                    +
-                    `${record.blow}B`;
+                turn.className = "history-turn";
+                turn.textContent = `${gameState.history.length - index}回目`;
+                div.appendChild(turn);
+
+                const result =
+                    document.createElement("div");
+
+                result.className = "history-result";
+                result.textContent = `${record.hit}H ${record.blow}B`;
+                div.appendChild(result);
 
                 if (gameState.showCandidates) {
-                    title.textContent +=
-                        ` 残り候補 ${remainingList[gameState.history.length - 1 - index]}`;
-                }
 
-                div.appendChild(title);
+                    const remain =
+                        document.createElement("div");
+
+                    remain.className = "history-remain";
+
+                    remain.textContent =
+                        `残り候補数：${remainingList[
+                            gameState.history.length - 1 - index
+                        ]}`;
+                    div.appendChild(remain);
+                }
 
                 const colors =
                     document.createElement("div");
