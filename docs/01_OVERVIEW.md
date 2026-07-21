@@ -12,6 +12,13 @@ Hit / Blow の結果から、
 
 ---
 
+## リンク
+
+- 🌐 デモ：https://minmin96-dev.github.io/hit-and-blow-solver/
+- 📦 GitHub：https://github.com/minmin96-dev/hit-and-blow-solver
+
+---
+
 ## 主な機能
 
 - 色入力
