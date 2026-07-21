@@ -1,4 +1,7 @@
 /* ===== 共通 ===== */
+* {
+    box-sizing: border-box;
+}
 
 body {
     margin: 0;
@@ -188,13 +191,6 @@ h2 {
     background-color: #7f8c8d;
 }
 
-#candidate,
-#heatmap {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-}
-
 #heatmap-list {
     max-height: 420px;
     overflow-y: auto;
@@ -241,8 +237,12 @@ h2 {
 
 #candidate,
 #heatmap {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+
     flex: 1;
-    min-width: 320px;
+    min-width: 0;
 }
 
 /* ===== Footer ===== */
