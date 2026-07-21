@@ -1,7 +1,6 @@
 function renderHistory() {
 
-    const historyArea =
-        document.getElementById("history");
+    const historyArea = document.getElementById("history");
 
     historyArea.innerHTML ="<h2>履歴</h2>";
 
@@ -48,20 +47,6 @@ function renderHistory() {
                 result.textContent = `${record.hit}H ${record.blow}B`;
                 div.appendChild(result);
 
-                if (gameState.showCandidates) {
-
-                    const remain =
-                        document.createElement("div");
-
-                    remain.className = "history-remain";
-
-                    remain.textContent =
-                        `残り候補数：${remainingList[
-                            gameState.history.length - 1 - index
-                        ]}`;
-                    div.appendChild(remain);
-                }
-
                 const colors =
                     document.createElement("div");
 
@@ -82,6 +67,21 @@ function renderHistory() {
                     loadHistory(index);
                 };
                 div.appendChild(editButton);
+
+                if (gameState.showCandidates) {
+
+                  const remain =
+                     document.createElement("div");
+
+                   remain.className = "history-remain";
+
+                  remain.textContent =
+                      `残り候補数：${remainingList[
+                          gameState.history.length - 1 - index
+                     ]}`;
+
+                div.appendChild(remain);
+                }
 
                 historyArea.appendChild(div);
              }
