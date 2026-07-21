@@ -118,8 +118,8 @@ button:active {
 .history-colors {
     display: flex;
     align-items: center;
-    gap: 0px;
-    margin-top: 0;
+    gap: 2px;
+    flex-shrink: 0;
 }
 
 .candidate-row {
@@ -181,8 +181,8 @@ h2 {
 }
 
 .edit-button {
-    padding: 5px 12px;
-    font-size: 12px;
+    padding: 4px 8px;
+    font-size: 11px;
     margin-top: 0;
     background-color: #95a5a6;
 }
@@ -213,19 +213,23 @@ h2 {
 }
 
 .history-turn {
-    width: 60px;
+    width: 48px;
+    flex-shrink: 0;
     font-weight: bold;
 }
 
 .history-result {
-    width: 55px;
+    width: 42px;
+    flex-shrink: 0;
     color: #555;
 }
 
 .history-remain {
-    width: 120px;
+    flex: 1;
+    min-width: 70px;
     color: #888;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
+    white-space: nowrap;
 }
 
 /* ===== 分析レイアウト ===== */
@@ -268,6 +272,23 @@ footer p {
 
     #candidate {
         margin-bottom: 20px;
+    }
+
+    .history-row {
+    gap: 6px;
+    }
+
+    .history-turn {
+       width: 42px;
+    }
+
+    .history-result {
+      width: 38px;
+    }
+
+    .history-remain {
+       min-width: 55px;
+      font-size: 12px;
     }
 
 }
