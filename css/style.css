@@ -198,8 +198,9 @@ h2 {
 
 .history-row {
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
-    gap: 14px;
+    gap: 6px;
     padding: 10px 0;
     border-bottom: 1px solid #ececec;
 }
@@ -225,11 +226,10 @@ h2 {
 }
 
 .history-remain {
-    flex: 1;
-    min-width: 70px;
+    flex-basis: 100%;
+    margin-left: 48px;
+    font-size: 12px;
     color: #888;
-    font-size: 0.85rem;
-    white-space: nowrap;
 }
 
 /* ===== 分析レイアウト ===== */
