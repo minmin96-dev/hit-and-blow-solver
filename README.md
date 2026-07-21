@@ -7,6 +7,13 @@
 
 ---
 
+## リンク
+
+- 🌐 デモ：https://minmin96-dev.github.io/hit-and-blow-solver/
+- 📦 GitHub：https://github.com/minmin96-dev/hit-and-blow-solver
+
+---
+
 ## スクリーンショット
 
 ### PC
